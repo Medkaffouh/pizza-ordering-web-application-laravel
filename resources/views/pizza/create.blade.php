@@ -32,7 +32,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Pizza') }}</div>
 
-                    <form action="{{route('pizza.store')}}" method="POST">@csrf
+                    <form action="{{route('pizza.store')}}" method="POST" enctype="multipart/form-data">@csrf
                     <div class="card-body">
 
                        <div class="mb-3">
