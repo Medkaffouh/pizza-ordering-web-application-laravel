@@ -16,7 +16,7 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        $pizzas = Pizza::paginate(2);
+        $pizzas = Pizza::paginate(5);
         return view('pizza.index', compact('pizzas'));
     }
 
@@ -97,7 +97,7 @@ class PizzaController extends Controller
         $pizza->large_pizza_price = $request->large_pizza_price;
         $pizza->category = $request->category;
         $pizza->image = $path;
-        $pizza->save();
+        $pizza->update();
         return redirect()->route('pizza.index')->with('message','Pizza updated successfully!');
 
     }
