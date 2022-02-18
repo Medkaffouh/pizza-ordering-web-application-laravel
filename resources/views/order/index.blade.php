@@ -23,6 +23,7 @@
                             <th scope="col">Small pizza</th>
                             <th scope="col">Medium pizza</th>
                             <th scope="col">Large pizza</th>
+                            <th scope="col">Totale($)</th>
                             <th scope="col">Message</th>
                             <th scope="col">Status</th>
                             <th scope="col">Accept</th>
@@ -33,18 +34,30 @@
                         <tbody>
                             @foreach ($orders as $order)
                           <tr>
-                            <th scope="row">{{$order->id}}</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button class="btn btn-primary">Accept</button></td>
-                            <td><button class="btn btn-danger">Reject</button></td>
-                            <td><button class="btn btn-success">Completed</button></td>
+                            <th>{{$order->user->name}}</th>
+                            <td>{{$order->user->email}}<br>{{$order->phone}}</td>
+                            <td>{{$order->date}}/{{$order->time}}</td>
+                            <td>{{$order->pizza->name}}</td>
+                            <td>{{$order->small_pizza}}</td>
+                            <td>{{$order->medium_pizza}}</td>
+                            <td>{{$order->large_pizza}}</td>
+                            <td>${{($order->pizza->small_pizza_price * $order->small_pizza)+
+                            ($order->pizza->medium_pizza_price * $order->medium_pizza)+
+                            ($order->pizza->large_pizza_price * $order->large_pizza)
+                            }}</td>
+                            <td>{{$order->body}}</td>
+                            <td>{{$order->status}}</td>
+                            <form action="{{route('order.status', $order->id)}}" method="post">@csrf
+                                <td>
+                                    <input type="submit" name="status" class="btn btn-primary btn-sm" value="Accepted">
+                                </td>
+                                <td>
+                                    <input type="submit" name="status" class="btn btn-danger btn-sm" value="Rejected">
+                                </td>
+                                <td>
+                                    <input type="submit" name="status" class="btn btn-success btn-sm" value="Completed">
+                                </td>
+                            </form>
                           </tr>
                           @endforeach
                         </tbody>
