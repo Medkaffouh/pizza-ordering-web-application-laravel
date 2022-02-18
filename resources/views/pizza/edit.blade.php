@@ -48,7 +48,7 @@
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
                             <select name="category" class="form-select">
-                                <option value="{{$pizza->category}} " selected disabled>{{$pizza->category}} </option>
+                                <option value="{{$pizza->category}} " selected>{{$pizza->category}} </option>
                                 <option value="vegatarian">Vegatarian pizza</option>
                                 <option value="nonvegatarian">nonvegatarian pizza</option>
                                 <option value="traditional">Traditional</option>
