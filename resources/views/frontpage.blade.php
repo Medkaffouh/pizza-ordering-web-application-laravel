@@ -24,10 +24,19 @@
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <p>name</p>
-                            <p>description</p>
-                        </div>
+                        @forelse ($pizzas as $pizza)
+                            <div class="col-md-4 mt-2 text-center" style="border:1px solid #ccc">
+                                <img src="{{Storage::url($pizza->image)}}" class="img-thumbnail" style="width: 100%;">
+                                <p>{{$pizza->name}}</p>
+                                <p>{{$pizza->description}}</p>
+                                <a href="{{route('pizza.show', $pizza->id)}}">
+                                    <button class="btn btn-danger mb-1">Order Now</button>
+                                </a>
+                            </div>
+                        @empty
+                            <p>No pizza to show</p>
+                        @endforelse
+
                     </div>
                 </div>
             </div>

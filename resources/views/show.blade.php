@@ -1,0 +1,57 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">{{ __('Menu') }}</div>
+
+                <div class="card-body">
+                    @if (Auth::check())
+                    <form action="{{route('order.store')}}" method="post">@csrf
+                        <div class="form-group ">
+                            <p>Name:{{auth()->user()->name}}</p>
+                            <p>Email:{{auth()->user()->email}}</p>
+                            <p>Phone number: <input type="number" class="form-control" name="phone"></p>
+                            <p>Small pizza order: <input type="number" class="form-control" name="small_pizza" value="0"></p>
+                            <p>Medium pizza order: <input type="number" class="form-control" name="medium_pizza" value="0"></p>
+                            <p>Large pizza order: <input type="number" class="form-control" name="large_pizza" value="0"></p>
+                            <p><input type="hidden" name="pizza_id" value="{{$pizza->id}}"></p>
+                            <p><input type="date" name="date" class="form-control"></p>
+                            <p><input type="time" name="time" class="form-control"></p>
+                            <p><textarea name="body"  class="form-control"></textarea></p>
+
+
+
+                            <p class="text-center">
+                                <button class="btn btn-danger" type="submit">Make order</button>
+                            </p>
+                        </div>
+                    </form>
+                    @else
+                    <a href="/login">Please login to make order</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Pizza') }}</div>
+
+                <div class="card-body">
+                    <div class="row">
+
+                                <img src="{{Storage::url($pizza->image)}}" class="img-thumbnail" style="width: 100%;">
+                                <p><h3>{{$pizza->name}}</h3></p>
+                                <p><h4>{{$pizza->description}}</h4></p>
+                                <p>Small pizza price:${{$pizza->small_pizza_price}}</p>
+                                <p>Medium pizza price:${{$pizza->medium_pizza_price}}</p>
+                                <p>Large pizza price:${{$pizza->large_pizza_price}}</p>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
